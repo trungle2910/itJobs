@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import { Switch, Route, Link, Redirect, useHistory } from "react-router-dom";
+import Navbarr from "./components/Navbarr";
+import JobDetail from "./components/JobDetail";
+import JobsList from "./components/JobsList";
+import Login from "./components/Login";
 
 function App() {
+  const history = useHistory();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const ProtectedRoute = (props) => {
+    if (isAuthenticated == true) {
+      return <Route {...props} />;
+    } else {
+      // history.pushState("/login");
+      return <Redirect to="/login" />;
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbarr />
+      <div className="background">
+        <Switch>
+          <Route
+            path="/login"
+            exact
+            component={() => (
+              <Login
+                isAuthenticated={isAuthenticated}
+                setIsAuthenticated={setIsAuthenticated}
+              />
+            )}
+          />
+          {/* <Route path="/jobs" exact component={JobsList} /> */}
+          <Route path="/" exact component={JobsList} />
+          {/* <Route path="/jobs/:id" component={JobDetail} /> */}
+          <ProtectedRoute path="/jobs/:id" component={JobDetail} />
+        </Switch>
+      </div>
     </div>
   );
 }
