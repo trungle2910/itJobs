@@ -16,8 +16,9 @@ const Login = ({ isAuthenticated, setIsAuthenticated }) => {
     <>
       <div className="login">
         <Form>
+          <h1 style={{ color: "olivedrab" }}>SIGN TO SEE MORE DETAIL</h1>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Username</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter Username"
@@ -26,7 +27,7 @@ const Login = ({ isAuthenticated, setIsAuthenticated }) => {
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               type="password"
               placeholder="Password"
